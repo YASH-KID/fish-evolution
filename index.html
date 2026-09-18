@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fish Evolution</title>
+  <link rel="icon" href="icon.ico" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🐟 Fish Evolution</h1>
+    <div class="controls">
+      <div class="speed-group" role="group" aria-label="Simulation speed">
+        <button id="speed1x" class="speed-btn">1x</button>
+        <button id="speed5x" class="speed-btn">5x</button>
+        <button id="speedMax" class="speed-btn">Max</button>
+      </div>
+      <button id="restartBtn" class="restart-btn">Restart</button>
+    </div>
+  </header>
+
+  <section class="stats-bar">
+    <div class="stat"><span class="stat-label">Generation</span><span id="statGeneration" class="stat-value">1</span></div>
+    <div class="stat"><span class="stat-label">Alive</span><span id="statAlive" class="stat-value">40 / 40</span></div>
+    <div class="stat"><span class="stat-label">Gen Time</span><span id="statTimer" class="stat-value">0.0s</span></div>
+    <div class="stat"><span class="stat-label">Last Gen Best</span><span id="statLastGen" class="stat-value">—</span></div>
+    <div class="stat"><span class="stat-label">Best Ever</span><span id="statBestEver" class="stat-value">0.0s</span></div>
+    <div class="stat"><span class="stat-label">NN Panel Following</span><span id="statFollowing" class="stat-value">—</span></div>
+    <div class="stat"><span class="stat-label">Backend</span><span id="statBackend" class="stat-value">GPU (WebGL)</span></div>
+    <div class="stat"><span class="stat-label">Tick Time</span><span id="statTickTime" class="stat-value">0.0ms</span></div>
+  </section>
+
+  <main class="panels">
+    <section class="panel nn-panel">
+      <h2>Live Brain (current best fish)</h2>
+      <canvas id="nnCanvas" width="460" height="560"></canvas>
+      <p class="legend">
+        <span class="legend-dot blue"></span> positive weight
+        <span class="legend-dot red"></span> negative weight
+        <span class="legend-dot orange"></span> active (+)
+        <span class="legend-dot cyan"></span> active (−)
+      </p>
+    </section>
+
+    <section class="panel tank-panel">
+      <h2>The Pond</h2>
+      <canvas id="tankCanvas"></canvas>
+    </section>
+  </main>
+
+  <!-- Required: this app runs entirely on GPU via TensorFlow.js's WebGL
+       backend - there is no CPU fallback. If this fails to load (e.g.
+       offline), main.js shows an error state instead of starting. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js" async></script>
+  <script src="neuralNetwork.js"></script>
+  <script src="gpuBrain.js"></script>
+  <script src="simulation.js"></script>
+  <script src="render.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
