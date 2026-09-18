@@ -7,6 +7,23 @@ Watch a neural network learn to survive, live, in two panels:
 
 This app runs entirely on GPU — see "GPU-only" below for exactly what that means and a real limitation on Windows laptops with two GPUs (Intel + NVIDIA) that's worth understanding before you go looking for your GPU usage meter to spike.
 
+## How to open it
+
+Double-click the **Fish Evolution** icon on your Desktop. It opens as its
+own app window (no browser tabs/address bar).
+
+You can also just double-click `index.html` in this folder to open it in
+any browser — it works the same way, just inside a normal browser tab.
+
+## Setting it up on a new computer
+
+Double-click **`Setup Fish Evolution.bat`**. It opens a small setup window
+that checks for Chrome or Edge (the only thing this app needs) and creates
+the Desktop shortcut for you — no manual steps. Nothing else gets
+installed, since this app has no other dependencies. (`Create Desktop
+Shortcut.bat` does the same shortcut-creation step without the checklist
+window, if you'd rather skip straight to it.)
+
 ## How it works
 
 Each fish's brain takes **13 inputs** every instant:
@@ -71,13 +88,17 @@ Even with all of that, don't be surprised if your GPU usage monitor barely moves
 ## Files
 
 ```
-index.html         → page structure (both panels, controls, stats)
-style.css           → dark ocean visual theme
-neuralNetwork.js     → the NeuralNet class: forward pass, weight mutation, structural (add/remove-node) mutation
-gpuBrain.js            → batches the whole population and runs it on the GPU via TensorFlow.js (WebGL) - the only compute path
-simulation.js            → Fish/Shark physics + sensing, and the genetic algorithm
-render.js                  → draws both canvases every frame
-main.js                      → waits for GPU readiness, wires up controls, runs the animation loop
+index.html                     → page structure (both panels, controls, stats)
+style.css                      → dark ocean visual theme
+neuralNetwork.js               → the NeuralNet class: forward pass, weight mutation, structural (add/remove-node) mutation
+gpuBrain.js                    → batches the whole population and runs it on the GPU via TensorFlow.js (WebGL) - the only compute path
+simulation.js                  → Fish/Shark physics + sensing, and the genetic algorithm
+render.js                      → draws both canvases every frame
+main.js                        → waits for GPU readiness, wires up controls, runs the animation loop
+icon.ico                       → custom app icon, used by the Desktop shortcut
+Setup Fish Evolution.bat       → double-click to set up / recreate the Desktop shortcut (checklist wizard)
+setup.ps1                      → the setup wizard logic the .bat runs
+Create Desktop Shortcut.bat    → lighter alternative: creates the shortcut with no checklist window
 ```
 
 This app now requires an internet connection (at least the first load) to fetch TensorFlow.js from a CDN — GPU mode is the only mode, and there's no offline fallback.
